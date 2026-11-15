@@ -2,10 +2,11 @@ import type { MouseEventHandler } from "react";
 import "./ButtonStyles.css";
 
 type ButtonProps = {
-    handleClick: MouseEventHandler<HTMLButtonElement>;
+    handleClick?: MouseEventHandler<HTMLButtonElement>;
     isPrimary?: boolean;
     customStyle?: string;
     label: string;
+    type?: "button" | "submit";
 }
 
 const Button = (props: ButtonProps) => {
@@ -14,9 +15,14 @@ const Button = (props: ButtonProps) => {
        isPrimary = true,
        label,
        customStyle,
+       type = "button",
     } = props;
     return (
-        <button onClick={handleClick} className={`${isPrimary ? "primaryButton" : "secondaryButton"} ${customStyle}`}>
+        <button
+            type={type}
+            onClick={handleClick}
+            className={`${isPrimary ? "primaryButton" : "secondaryButton"} ${customStyle ?? ""}`}
+        >
             {label}
         </button>
     )

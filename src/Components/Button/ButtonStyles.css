@@ -1,11 +1,37 @@
+.primaryButton,
+.secondaryButton {
+    height: 42px;
+    padding: 0 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
 .primaryButton {
-    height: 25px;
-    width: 50px;
-    color: green;
+    color: #fff;
+    background-color: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.primaryButton:hover {
+    background-color: #1d4ed8;
 }
 
 .secondaryButton {
-    height: 25px;
-    width: 50px;
-    color: gray;
+    color: #374151;
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+}
+
+.secondaryButton:hover {
+    background-color: #f9fafb;
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 2px;
 }

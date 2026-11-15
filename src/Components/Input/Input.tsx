@@ -7,42 +7,45 @@ type InputProps = {
     isControlled?: boolean;
     customStyle?: string;
     id?: string;
-    key?: string;
     parentRef?: Ref<HTMLInputElement>;
     type?: "text" | "number" | "password";
-    isPassword?: boolean;
+    placeholder?: string;
+    autoComplete?: string;
 };
 const Input = (props: InputProps) => {
     const {
         label,
-        value, 
+        value,
         isControlled = true,
         parentRef,
         customStyle,
         id,
-        key,
         type,
+        placeholder,
+        autoComplete,
     } = props;
     const inRef = useRef<HTMLInputElement>(null);
+    const inputId = id ?? label;
     return (
         <div className="inputWrapper">
-          <div className="inputLabel">
+          {/* htmlFor links the label to the input: clicking the label focuses it */}
+          <label className="inputLabel" htmlFor={inputId}>
             {label}
-          </div>
-          <div className="inputElement">
-            <input
-               id={id ?? label}
-               key={key ?? label}
-               className={customStyle ?? `inputStyle`}
-               {
-                ...(isControlled ? {
-                    value: value
-                } : {})
-               }
-               ref={parentRef ?? inRef}
-               type={type ?? "text"}
-            />
-          </div>
+          </label>
+          <input
+             id={inputId}
+             name={inputId}
+             className={customStyle ?? `inputStyle`}
+             {
+              ...(isControlled ? {
+                  value: value
+              } : {})
+             }
+             ref={parentRef ?? inRef}
+             type={type ?? "text"}
+             placeholder={placeholder}
+             autoComplete={autoComplete}
+          />
         </div>
     )
 }
