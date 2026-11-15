@@ -1,0 +1,11 @@
+.primaryButton {
+    height: 25px;
+    width: 50px;
+    color: green;
+}
+
+.secondaryButton {
+    height: 25px;
+    width: 50px;
+    color: gray;
+}

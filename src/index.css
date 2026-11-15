@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f5f7;
+  color: #1f2328;
+}
+h1 { font-size: 1.4rem; margin: 0 0 0.5rem; }
+.muted { color: #6b7280; font-size: 0.875rem; margin: 0 0 1rem; }
+
+.app-page { min-height: 100vh; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.85rem 1.5rem; background: #fff; border-bottom: 1px solid #e5e7eb;
+}
+.content { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }

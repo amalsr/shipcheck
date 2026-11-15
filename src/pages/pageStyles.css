@@ -1,0 +1,19 @@
+
+.loginPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    min-height: 100vh;   
+    /* background-color: gray; */
+}
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 400px;
+    /* background-color: red; */
+    max-height: 100vh;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+}
