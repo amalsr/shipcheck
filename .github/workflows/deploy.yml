@@ -1,0 +1,53 @@
+name: Deploy
+
+# Only deploy when code lands on main (direct push or merged PR) - never on an open PR
+on:
+  push:
+    branches: [main]
+
+# Permissions the deploy action needs to publish to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If two pushes happen quickly, don't run two deploys at the same time
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # Job 1: build the app (same as CI) and package the dist/ folder
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      # GitHub Pages has no SPA routing: a refresh on /shipcheck/tasks would 404.
+      # Serving index.html as the 404 page lets React Router handle the URL instead.
+      - run: cp dist/index.html dist/404.html
+
+      # Package dist/ so the deploy job can pick it up
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # Job 2: publish it. "needs: build" = only runs if the build job passed
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
